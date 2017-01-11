@@ -14,6 +14,7 @@ public class ShoppingBasketTest {
   private Item toilet_paper;
   private Item lotion;
   private Item diamond;
+  private Customer barry;
 
   @Before
   public void Before()  {
@@ -22,11 +23,12 @@ public class ShoppingBasketTest {
     toilet_paper = new Item(99, false, "loo_roll");
     lotion = new Item(299, false, "lotion");
     diamond = new Item(2000, false, "diamond");
+    barry = new Customer(true);
   }
 
   @Test
   public void testBasketStartsEmpty() {
-    assertEquals(000, basket.getSize());
+    assertEquals(0, basket.getSize());
   }
 
   @Test
@@ -85,10 +87,18 @@ public class ShoppingBasketTest {
     assertEquals(398, basket.getBogofDiscount());
   }
 
-  // @Test
-  // public void testTenPercentDiscount() {
-  // basket.addItem(diamond);
-  // assertEquals(1800, basket.getTenPercentDiscount(), 0.1);
-  // }
+  @Test
+  public void testTenPercentDiscount() {
+  basket.addItem(diamond);
+  int total = basket.getBasketTotal();
+  assertEquals(1800, basket.getTenPercentDiscount(total));
+  }
+
+  @Test
+  public void testCustomerLoyalty() {
+  basket.addItem(diamond);
+  int total = basket.getBasketTotal();
+  assertEquals(1960, basket.applyLoyaltyDiscount(total, barry));
+  }
 
 }

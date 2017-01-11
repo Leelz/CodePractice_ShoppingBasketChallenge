@@ -61,12 +61,22 @@ public class Shopping_Basket {
     return discount;
   }
 
-  // public int getTenPercentDiscount(){
-  //       int balance = getBogofDiscount();
-  //       if(total >= 2000) {
-  //         total = total *= 0.9;
-  //       }
-  //       return total;
-  //     }
+  public int getTenPercentDiscount(int total){
+
+        if(total >= 2000) {
+          total = total *= 0.9;
+        }
+        return total;
+      }
+
+  public int applyLoyaltyDiscount(int total, Customer customer) {
+
+    if (customer.checkLoyaltyCard()) {
+      total *= 0.98;
+    }
+    return total;
+  }
+
+
   
 }
